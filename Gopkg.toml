@@ -28,3 +28,8 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[metadata.heroku]
+  root-package = "github.com/nawajar/go-api"
+  go-version = "1.11.1"
+  install = [ "./..." ]
