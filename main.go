@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 func handleRequest() {
 	http.HandleFunc("/", botFunc)
 	http.HandleFunc("/status", statusPage)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(getPort(), nil)
 }
 
 func statusPage(w http.ResponseWriter, r *http.Request) {
@@ -44,4 +45,13 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	json.NewEncoder(w).Encode(body)
+}
+
+func getPort() string {
+	var port = os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		fmt.Println("No Port In Heroku" + port)
+	}
+	return ":" + port
 }
