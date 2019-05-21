@@ -17,7 +17,7 @@ func main() {
 }
 
 func handleRequest() {
-	http.HandleFunc("/", botFunc)
+	http.HandleFunc("/bot", botFunc)
 	http.HandleFunc("/status", statusPage)
 	http.ListenAndServe(getPort(), nil)
 }
