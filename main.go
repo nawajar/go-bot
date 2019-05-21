@@ -53,6 +53,7 @@ func botFunc(w http.ResponseWriter, req *http.Request) {
 			}
 		}
 	}
+	fmt.Fprint(w, "bot bot")
 }
 
 func getPort() string {
