@@ -45,19 +45,29 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// url := "https://api.line.me/v2/bot/message/reply"
-	// accToken := "ae6P1wQm9pDtBXz1TQNnAqWJSUHvIiUl0GWPJNvLK8MQxYuPIaqaP+Kea9H6QcnyVCyw2iJILvy00zXyV/B9nIB+NAeP9P9da7HZxbk0atcm2tYeuXngrKaMBMWwMy3msa5PEluN2bGu0JI7enTELwdB04t89/1O/w1cDnyilFU="
-	// var jsonStr = []byte(`{"title":"Buy cheese and bread for breakfast."}`)
-	// req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
-	// req.Header.Set("Content-Type", "application/json")
-	// req.Header.Set("Authorization", " Bearer "+accToken)
+	for _, lineEvent := range lineEvents.Events {
+		if lineEvent.Type == "message" {
+			reply := &Reply{ReplyToken: lineEvent.ReplyToken, Message: Message{Type: lineEvent.Type, Text: lineEvent.Message.Text}}
+			fmt.Print(reply)
 
-	// client := &http.Client{}
-	// resp, err := client.Do(req)
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer resp.Body.Close()
+			url := "https://api.line.me/v2/bot/message/reply"
+			accToken := "ae6P1wQm9pDtBXz1TQNnAqWJSUHvIiUl0GWPJNvLK8MQxYuPIaqaP+Kea9H6QcnyVCyw2iJILvy00zXyV/B9nIB+NAeP9P9da7HZxbk0atcm2tYeuXngrKaMBMWwMy3msa5PEluN2bGu0JI7enTELwdB04t89/1O/w1cDnyilFU="
+
+			jsonStr, _ := json.Marshal(*reply)
+			lastReq = string(jsonStr)
+			req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
+			req.Header.Set("Content-Type", "application/json")
+			req.Header.Set("Authorization", " Bearer "+accToken)
+
+			client := &http.Client{}
+			resp, err := client.Do(req)
+			if err != nil {
+				panic(err)
+			}
+			defer resp.Body.Close()
+
+		}
+	}
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	fmt.Fprint(w, "It's oks!")
@@ -92,4 +102,9 @@ type Events struct {
 	Source     Source  `json:"source"`
 	Timestamp  int64   `json:"timestamp"`
 	Message    Message `json:"message"`
+}
+
+type Reply struct {
+	ReplyToken string  `json:"replyToken"`
+	Message    Message `json:"messages"`
 }
