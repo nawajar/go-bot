@@ -47,10 +47,10 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 
 	for _, lineEvent := range lineEvents.Events {
 		if lineEvent.Type == "message" {
-			reply := &Reply{ReplyToken: lineEvent.ReplyToken, Message: Message{Type: "text", Text: lineEvent.Message.Text}}
+			reply := &Reply{ReplyToken: lineEvent.ReplyToken, Message: []Message{Message{Type: "text", Text: lineEvent.Message.Text}}}
 			fmt.Print(reply)
 
-			url := "https://api.line.me/v2/bot/message/push"
+			url := "https://api.line.me/v2/bot/message/reply"
 			accToken := "ae6P1wQm9pDtBXz1TQNnAqWJSUHvIiUl0GWPJNvLK8MQxYuPIaqaP+Kea9H6QcnyVCyw2iJILvy00zXyV/B9nIB+NAeP9P9da7HZxbk0atcm2tYeuXngrKaMBMWwMy3msa5PEluN2bGu0JI7enTELwdB04t89/1O/w1cDnyilFU="
 
 			jsonStr, _ := json.Marshal(*reply)
@@ -106,6 +106,6 @@ type Events struct {
 }
 
 type Reply struct {
-	ReplyToken string  `json:"replyToken"`
-	Message    Message `json:"messages"`
+	ReplyToken string    `json:"replyToken"`
+	Message    []Message `json:"messages"`
 }
