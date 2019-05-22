@@ -50,7 +50,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 			reply := &Reply{ReplyToken: lineEvent.ReplyToken, Message: Message{Type: lineEvent.Type, Text: lineEvent.Message.Text}}
 			fmt.Print(reply)
 
-			url := "https://api.line.me/v2/bot/message/reply"
+			url := "https://api.line.me/v2/bot/message/push"
 			accToken := "ae6P1wQm9pDtBXz1TQNnAqWJSUHvIiUl0GWPJNvLK8MQxYuPIaqaP+Kea9H6QcnyVCyw2iJILvy00zXyV/B9nIB+NAeP9P9da7HZxbk0atcm2tYeuXngrKaMBMWwMy3msa5PEluN2bGu0JI7enTELwdB04t89/1O/w1cDnyilFU="
 
 			jsonStr, _ := json.Marshal(*reply)
