@@ -93,7 +93,7 @@ type Source struct {
 }
 type Message struct {
 	Type string `json:"type"`
-	ID   string `json:"id"`
+	ID   string `json:"id,omitempty"`
 	Text string `json:"text"`
 }
 type Events struct {
