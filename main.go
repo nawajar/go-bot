@@ -38,7 +38,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 	}
 
 	bodyBytes, _ := ioutil.ReadAll(r.Body)
-	lastReq := string(bodyBytes)
+	lastReq = string(bodyBytes)
 	//print raw response body for debugging purposes
 	fmt.Println("\n\n", lastReq, "\n\n")
 
