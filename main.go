@@ -47,7 +47,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 
 	for _, lineEvent := range lineEvents.Events {
 		if lineEvent.Type == "message" {
-			reply := &Reply{ReplyToken: lineEvent.ReplyToken, Message: Message{Type: lineEvent.Type, Text: lineEvent.Message.Text}}
+			reply := &Reply{ReplyToken: lineEvent.ReplyToken, Message: Message{Type: "text", Text: lineEvent.Message.Text}}
 			fmt.Print(reply)
 
 			url := "https://api.line.me/v2/bot/message/push"
