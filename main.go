@@ -54,7 +54,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 			accToken := "ae6P1wQm9pDtBXz1TQNnAqWJSUHvIiUl0GWPJNvLK8MQxYuPIaqaP+Kea9H6QcnyVCyw2iJILvy00zXyV/B9nIB+NAeP9P9da7HZxbk0atcm2tYeuXngrKaMBMWwMy3msa5PEluN2bGu0JI7enTELwdB04t89/1O/w1cDnyilFU="
 
 			jsonStr, _ := json.Marshal(*reply)
-			lastReq = string(jsonStr)
+
 			req, err := http.NewRequest("POST", url, bytes.NewBuffer(jsonStr))
 			req.Header.Set("Content-Type", "application/json")
 			req.Header.Set("Authorization", " Bearer "+accToken)
@@ -66,6 +66,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 			}
 			defer resp.Body.Close()
 
+			lastReq = string(jsonStr)
 		}
 	}
 
