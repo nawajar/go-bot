@@ -27,7 +27,7 @@ func handleRequest() {
 }
 
 func statusPage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "It's ok!")
+	fmt.Fprint(w, m)
 }
 
 func lastRequest(w http.ResponseWriter, r *http.Request) {
@@ -59,7 +59,8 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 					m[s[1]] = s[2]
 				}
 				if strings.HasPrefix(s[2], "0") == false {
-					m[s[1]+" "+s[2]] = s[3]
+					name := s[1] + " " + s[2]
+					m[name] = s[3]
 				}
 				reply.ModifySticker("11537", "52002740")
 			}
@@ -68,8 +69,8 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 				if m[s[1]] != "" {
 					reply.ModifyMessage(m[s[1]])
 				}
-
-				if m[s[1]+" "+s[2]] != "" {
+				name := s[1] + " " + s[2]
+				if m[name] != "" {
 					reply.ModifyMessage(m[s[3]])
 				}
 
