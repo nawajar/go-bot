@@ -57,6 +57,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 			if s[0] == "เพิ่มเบอร์" {
 				fmt.Println(s[1])
 				m[s[1]] = s[2]
+				reply.ModifySticker("11537", "52002740")
 			}
 
 			if s[0] == "เบอร์" {
@@ -78,6 +79,12 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 
 func (r *Reply) ModifyMessage(s string) {
 	r.Message[0].Text = s
+}
+
+func (r *Reply) ModifySticker(packId, stickerId string) {
+	r.Message[0].Type = "sticker"
+	r.Message[0].PackageId = packId
+	r.Message[0].StickerId = stickerId
 }
 
 func sendMessage(message []byte) {
@@ -114,9 +121,11 @@ type Source struct {
 	Type    string `json:"type"`
 }
 type Message struct {
-	Type string `json:"type"`
-	ID   string `json:"id,omitempty"`
-	Text string `json:"text"`
+	Type      string `json:"type"`
+	ID        string `json:"id,omitempty"`
+	Text      string `json:"text"`
+	PackageId string `json:"packageId,omitempty"`
+	StickerId string `json:"stickerId,omitempty"`
 }
 type Events struct {
 	Type       string  `json:"type"`
