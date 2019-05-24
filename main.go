@@ -59,7 +59,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 					m[s[1]] = s[2]
 				}
 				if strings.HasPrefix(s[2], "0") == false {
-					name := s[1] + " " + s[2]
+					name := s[1] + s[2]
 					m[name] = s[3]
 				}
 				reply.ModifySticker("11537", "52002740")
@@ -69,7 +69,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 				if m[s[1]] != "" {
 					reply.ModifyMessage(m[s[1]])
 				}
-				name := s[1] + " " + s[2]
+				name := s[1] + s[2]
 				if m[name] != "" {
 					reply.ModifyMessage(m[s[3]])
 				}
