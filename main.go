@@ -15,7 +15,7 @@ var m map[string]string
 
 func main() {
 	fmt.Println("Init success")
-	m := make(map[string]string)
+	m = make(map[string]string)
 	handleRequest()
 }
 
