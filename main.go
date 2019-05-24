@@ -55,8 +55,12 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 			s := strings.Split(lineEvent.Message.Text, " ")
 
 			if s[0] == "เพิ่มเบอร์" {
-				fmt.Println(s[1])
-				m[s[1]] = s[2]
+				if strings.HasPrefix(s[1], "0") {
+					m[s[1]] = s[2]
+				}
+				if strings.HasPrefix(s[1], "0") == false {
+					m[s[1]+" "+s[2]] = s[3]
+				}
 				reply.ModifySticker("11537", "52002740")
 			}
 
