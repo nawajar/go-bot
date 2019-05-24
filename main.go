@@ -71,7 +71,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 				}
 				name := s[1] + s[2]
 				if m[name] != "" {
-					reply.ModifyMessage(m[s[3]])
+					reply.ModifyMessage(m[name])
 				}
 
 			}
