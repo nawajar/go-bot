@@ -52,7 +52,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 		if lineEvent.Type == "message" {
 
 			reply := &Reply{ReplyToken: lineEvent.ReplyToken, Message: []Message{Message{Type: "text", Text: ""}}}
-			s := strings.Split("เพิ่มเบอร์ @nawa 0959351389", " ")
+			s := strings.Split(lineEvent.Message.Text, " ")
 
 			if s[0] == "เพิ่มเบอร์" {
 				fmt.Println(s[1])
