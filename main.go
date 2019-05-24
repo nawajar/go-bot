@@ -61,7 +61,7 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 
 			if s[0] == "เบอร์" {
 				if m[s[1]] != "" {
-					reply.Message[0].Text = m[s[1]]
+					reply.ModifyMessage(m[s[1]])
 				}
 			}
 
@@ -74,6 +74,10 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	fmt.Fprint(w, "It's oks!")
+}
+
+func (r *Reply) ModifyMessage(s string) {
+	r.Message[0].Text = s
 }
 
 func sendMessage(message []byte) {
