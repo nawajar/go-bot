@@ -68,6 +68,11 @@ func botFunc(w http.ResponseWriter, r *http.Request) {
 				if m[s[1]] != "" {
 					reply.ModifyMessage(m[s[1]])
 				}
+
+				if m[s[1]+" "+s[2]] != "" {
+					reply.ModifyMessage(m[s[3]])
+				}
+
 			}
 
 			jsonStr, _ := json.Marshal(*reply)
